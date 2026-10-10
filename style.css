@@ -35,65 +35,88 @@ body {
     width: 100%;
 }
 
-/* 3. CENTER WHITE HEADER CARD CONTAINER PANEL */
+/* THE COMPACT HEADER PANEL */
 .banner-header {
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: #FFFFFF;
     border: 4px solid #FFE4E4; 
     border-radius: 28px;
     max-width: 1100px; 
-    margin: 0 auto;       
+    margin: 40px auto 0 auto;       
     box-shadow: 0 10px 0px #FFE4E4;
     
-    /* Flex grid sets elements left-to-right cleanly */
+    /* Using rigid row alignment with absolutely zero inner gaps */
     display: flex;
     flex-direction: row;
     align-items: center; 
     justify-content: flex-start;
     overflow: hidden; 
-    padding: 0 30px 0 0; 
+    padding: 0; 
 }
-
-/* The left side main animal crop size */
+.header-banner-container {
+    width: 55%; 
+    height: 180px;
+    position: relative; /* Crucial coordinate anchor for the absolute floating heart */
+    flex-shrink: 0;
+}
+/* FIX: Limits picture width to exactly 55% to clip its white background right out of frame! */
 .header-banner-pic {
-    width: 360px; /* Adjusted size down slightly so your text has premium white space room */
-    height: auto;
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
     display: block;
 }
 
-/* Smooth center floating heart settings */
+/* Fixed heart sticker metrics alignment floating smoothly over your new stripes */
 .sticker-heart {
-    width: 90px;  
-    height: 90px;
+    position: absolute;
+    z-index: 5; /* Forces it to hover above the picture layer safely */
+    
+    /* Adjust these layout values to move the heart around on top of the picture! */
+    right: 20px;  /* Places it near the right side divider edge of the picture */
+    top: 50%;
+    transform: translateY(-50%); /* Centers it vertically over the animals */
+    
+    width: 100px;  
+    height: 200px;
     object-fit: contain;
-    margin-left: 20px;   /* Clean padding margins replacing old broken negative values */
-    margin-right: 25px;  
-    flex-shrink: 0;
+    
+    /* Keeps your active floating animation intact */
     animation: floatingHeart 2.5s ease-in-out infinite;
 }
 
-/* Text cluster filling out the rest of the white canvas area */
-.text-group {
+/* YOUR CUSTOM STRIPE CONTAINER: Occupies the remaining cropped frame space completely */
+.header-custom-decor {
     flex: 1;            
-    text-align: left;   
+    height: 180px; 
     min-width: 0;       
-    padding-left: 10px;
+    padding: 20px;
+    
+    /* Your exact pastel pinstripe specifications */
+    background-color: #ffb6cf;
+    opacity: 0.7;
+    background: repeating-linear-gradient(45deg, #fabacc 0, #fabacc 9px, #ffe5ee 9px, #ffe5ee 18px, #fff8fa 18px, #fff8fa 27px, #ffe5ee 27px, #ffe5ee 36px);
+/* Solid white outlines around text characters to defend readability over stripes */
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 2;
+    border-left: 4px solid #FFE4E4; /* Crisp pink divider boundary line */
 }
-
+/* Solid white outlines around text characters to defend readability over stripes */
 .banner-title {
     font-family: 'WhimsicalFont', sans-serif !important; 
-    font-size: 52px; 
-    color: #FF8B8B;
+    font-size: 72px; 
+    color: #FB6F92;
     margin: 0;
     font-weight: normal;
     white-space: nowrap; 
     letter-spacing: -1px; 
 }
 
-.banner-subtitle {
-    font-size: 16px; 
-    color: #8C6D53;
-    margin: 4px 0 0 0;
-}
+/* Text cluster filling out the rest of the white canvas area */
 
 /* 4. OUTER FLOATING GRAPHIC DECORATIONS RULES */
 .strawbaby {
@@ -108,7 +131,7 @@ body {
 
 .side-bunny {
     position: absolute;
-    top: 50%;
+    top: 70%;
     transform: translateY(-50%); 
     height: 95px;               
     width: auto;
@@ -151,10 +174,9 @@ body {
 
 /* 6. ANIMATION TIMING ENGINE DEFINITIONS */
 @keyframes floatingHeart {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-6px) scale(1.04); }
+    0%, 100% { transform: translateY(-50%) scale(1); }
+    50% { transform: translateY(-58%) scale(1.04); } /* Subtle bounce behavior */
 }
-
 @keyframes gentleSideFloat {
     0%, 100% { transform: translateY(-50%) scale(1); }
     50% { transform: translateY(-54%) scale(1.02); }
